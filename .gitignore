@@ -1,2 +1,6 @@
 
 .DS_Store
+mariadb_data
+
+wordpress/nginx_error.log
+wordpress/nginx_access.log

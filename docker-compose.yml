@@ -1,0 +1,27 @@
+version: '3'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.6
+    volumes:
+      - ./mariadb_data:/bitnami/mariadb
+    environment:
+      - MARIADB_USER=netpower
+      - MARIADB_DATABASE=db
+      - MARIADB_ROOT_PASSWORD=n3v0rN
+      - MARIADB_PASSWORD=unst0p@ble
+  wordpress:
+    image: docker.io/bitnami/wordpress-nginx:6
+    ports:
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./default.conf:/opt/bitnami/nginx/conf/server_blocks/default.conf
+    depends_on:
+      - mariadb
+    environment:
+      - WORDPRESS_DATABASE_HOST=mariadb
+      - WORDPRESS_DATABASE_PORT_NUMBER=3306
+      - WORDPRESS_DATABASE_USER=netpower
+      - WORDPRESS_DATABASE_NAME=db
+      - WORDPRESS_DATABASE_PASSWORD=unst0p@ble
