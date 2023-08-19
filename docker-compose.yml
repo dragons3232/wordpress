@@ -34,6 +34,7 @@ services:
     image: php:fpm-alpine
     volumes:
       - ./wordpress:/var/www/html
+      - ./docker-entrypoint.sh:/entrypoint.sh
     working_dir: /var/www/html
     networks:
       - internal

@@ -1,0 +1,1 @@
+/usr/local/bin/docker-php-ext-install mysqli
