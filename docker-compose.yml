@@ -31,7 +31,9 @@ services:
     networks:
       - internal
   phpfpm:
-    image: php:fpm-alpine
+    build:
+      context: .
+      dockerfile: docker-entrypoint.sh
     volumes:
       - ./wordpress:/var/www/html
       - ./docker-entrypoint.sh:/entrypoint.sh
