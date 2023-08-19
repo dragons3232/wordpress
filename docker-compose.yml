@@ -9,14 +9,17 @@ services:
       - MARIADB_DATABASE=db
       - MARIADB_ROOT_PASSWORD=n3v0rN
       - MARIADB_PASSWORD=unst0p@ble
-  wordpress:
-    image: docker.io/bitnami/wordpress-nginx:6
+    networks:
+      - internal
+  nginx:
+    image: nginx:alpine
     ports:
-      - '80:8080'
-      - '443:8443'
+      - '80:80'
+      - '443:443'
     volumes:
       - ./wordpress:/var/www/html
-      - ./default.conf:/opt/bitnami/nginx/conf/server_blocks/default.conf
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /var/www/html
     depends_on:
       - mariadb
     environment:
@@ -25,3 +28,15 @@ services:
       - WORDPRESS_DATABASE_USER=netpower
       - WORDPRESS_DATABASE_NAME=db
       - WORDPRESS_DATABASE_PASSWORD=unst0p@ble
+    networks:
+      - internal
+  phpfpm:
+    image: php:fpm-alpine
+    volumes:
+      - ./wordpress:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - internal
+networks:
+  internal:
+    driver: bridge
