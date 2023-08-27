@@ -37,6 +37,11 @@ function get_all_categories($data)
     'post_type' => 'category'
   ]);
 
+  foreach ($posts as $post) {
+    $fields = get_fields($post);
+    $post->acf = $fields;
+  }
+
   if (empty($posts)) {
     return null;
   }
