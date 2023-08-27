@@ -61,3 +61,46 @@ add_action('rest_api_init', function () {
     )
   );
 });
+
+function register_category_post_type()
+{
+  $labels = array(
+    'name'               =>  'Categories', 'post type general name',
+    'singular_name'      =>  'Category', 'post type singular name',
+    'menu_name'          =>  'Categories', 'admin menu',
+    'name_admin_bar'     =>  'Category', 'add new on admin bar',
+    'add_new'            =>  'Add New', 'Category',
+    'add_new_item'       => 'Add New Category',
+    'new_item'           => 'New Category',
+    'edit_item'          => 'Edit Category',
+    'view_item'          => 'View Category',
+    'all_items'          => 'All Categories',
+    'search_items'       => 'Search Categories',
+    'parent_item_colon'  => 'Parent Categories:',
+    'not_found'          => 'No Categories found.',
+    'not_found_in_trash' => 'No Categories found in Trash.'
+  );
+
+  $args = array(
+    'labels'             => $labels,
+    'description'        => 'Description.',
+    'public'             => true,
+    'publicly_queryable' => true,
+    'show_ui'            => true,
+    'show_in_menu'       => true,
+    'query_var'          => true,
+    'rewrite'            => array('slug' => 'Category'),
+    'capability_type'    => 'post',
+    'has_archive'        => true,
+    'hierarchical'       => false,
+    'menu_position'      => null,
+    'menu_icon'       => 'dashicons-category',
+    'supports'           => array('title', 'author'),
+    'show_in_rest'      => true,
+    //'rest_base' 		 => 'Categories',
+  );
+
+  register_post_type('category', $args);
+}
+
+register_category_post_type();
