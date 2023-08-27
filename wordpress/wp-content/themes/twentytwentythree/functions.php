@@ -31,6 +31,19 @@ function handleUpload(\WP_REST_Request $req)
   }
 }
 
+function get_all_categories($data)
+{
+  $posts = get_posts([
+    'post_type' => 'category'
+  ]);
+
+  if (empty($posts)) {
+    return null;
+  }
+
+  return $posts;
+}
+
 add_action('rest_api_init', function () {
   register_rest_route(
     'wp/v2',
@@ -38,6 +51,15 @@ add_action('rest_api_init', function () {
     array(
       'methods' => 'GET',
       'callback' => 'get_all_posts',
+    )
+  );
+
+  register_rest_route(
+    'wp/v2',
+    '/allcategories',
+    array(
+      'methods' => 'GET',
+      'callback' => 'get_all_categories',
     )
   );
 
