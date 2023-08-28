@@ -137,6 +137,17 @@ function scHello($atts)
   $a = shortcode_atts(array(
     'name' => 'Netpower', // default value
   ), $atts);
+
   return '<h1 style="color: #fa0">Hello ' . $a['name'] . '! I am a shortcode</h1>';
 }
+
+function scDoShortcode($atts)
+{
+  $a = shortcode_atts(array(
+    'name' => 'Newton', // default value
+  ), $atts);
+
+  return do_shortcode('[hello name="' . $a['name'] . '"]');
+}
 add_shortcode('hello', 'scHello');
+add_shortcode('doSC', 'scDoShortcode');
