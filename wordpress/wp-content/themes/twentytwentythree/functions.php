@@ -131,3 +131,9 @@ function register_category_post_type()
 }
 
 register_category_post_type();
+
+function scHello()
+{
+  return '<h1 style="color: #fa0">Hello! I am a shortcode</h1>';
+}
+add_shortcode('hello', 'scHello');
