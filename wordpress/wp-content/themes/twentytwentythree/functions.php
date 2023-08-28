@@ -151,3 +151,12 @@ function scDoShortcode($atts)
 }
 add_shortcode('hello', 'scHello');
 add_shortcode('doSC', 'scDoShortcode');
+
+
+function sayGoodbye()
+{
+  die('Bye! I am dead!');
+}
+add_action('sayGoodbye', 'sayGoodbye');
+
+do_action('sayGoodbye');
