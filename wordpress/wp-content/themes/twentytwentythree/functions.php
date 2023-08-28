@@ -147,7 +147,7 @@ function scDoShortcode($atts)
     'name' => 'Newton', // default value
   ), $atts);
 
-  return do_shortcode('[hello name="' . $a['name'] . '"]');
+  return apply_filters('filterMe', do_shortcode('[hello name="' . $a['name'] . '"]'));
 }
 add_shortcode('hello', 'scHello');
 add_shortcode('doSC', 'scDoShortcode');
@@ -159,4 +159,11 @@ function sayGoodbye()
 }
 add_action('sayGoodbye', 'sayGoodbye');
 
-do_action('sayGoodbye');
+// do_action('sayGoodbye');
+
+
+function filterExpression($expression)
+{
+  return str_replace('shortcode', 'filtered shortcode', $expression);
+}
+add_filter('filterMe', 'filterExpression');
