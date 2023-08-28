@@ -132,8 +132,11 @@ function register_category_post_type()
 
 register_category_post_type();
 
-function scHello()
+function scHello($atts)
 {
-  return '<h1 style="color: #fa0">Hello! I am a shortcode</h1>';
+  $a = shortcode_atts(array(
+    'name' => 'Netpower', // default value
+  ), $atts);
+  return '<h1 style="color: #fa0">Hello ' . $a['name'] . '! I am a shortcode</h1>';
 }
 add_shortcode('hello', 'scHello');
